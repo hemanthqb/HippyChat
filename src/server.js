@@ -22,6 +22,7 @@ import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
+import api from './api/handler';
 
 const server = global.server = express();
 
@@ -39,7 +40,9 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
-
+//API middleware
+server.use(api);
+//server.use('/api/content', require('./api/content'));
 //
 // Authentication
 // -----------------------------------------------------------------------------
@@ -75,6 +78,16 @@ server.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
+server.get('/api',async(req,res,next)=>{
+    try
+    {
+      res.status(200);
+      res.send({data:'data'});
+    }
+    catch (err) {
+
+    }
+});
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------

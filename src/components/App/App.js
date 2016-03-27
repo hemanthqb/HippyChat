@@ -10,11 +10,20 @@
 import React, { Component, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
 import s from './App.scss';
-import Header from '../Header';
-import Feedback from '../Feedback';
-import Footer from '../Footer';
+
+import LoginPage from '../LoginPage';
+import Chat from '../Chat';
+import store from '../../stores/messageStore'
+
 
 class App extends Component {
+
+  constructor(props){
+     super(props);
+     this.OnEnter=this.OnEnter.bind(this);
+     this.name='';
+     store.init();
+  }
 
   static propTypes = {
     context: PropTypes.shape({
@@ -47,19 +56,24 @@ class App extends Component {
   componentWillMount() {
     const { insertCss } = this.props.context;
     this.removeCss = insertCss(s);
+
   }
 
   componentWillUnmount() {
     this.removeCss();
   }
-
+OnEnter(value){
+  if(value!='')
+  {
+      this.name=value;
+      console.log("Entered:"+value);
+      this.setState({});
+  }
+}
   render() {
     return !this.props.error ? (
       <div>
-        <Header />
-        {this.props.children}
-        <Feedback />
-        <Footer />
+      {this.name==''? <LoginPage OnEnter={this.OnEnter}/>:<Chat name={this.name}/>}
       </div>
     ) : this.props.children;
   }

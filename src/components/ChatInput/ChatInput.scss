@@ -7,10 +7,19 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import keyMirror from 'fbjs/lib/keyMirror';
+@import '../variables.scss';
 
-export default keyMirror({
-    SEND_MESSAGE:null,
-    RECIVE_MESSAGE_LIST:null,
-    REQUEST_MESSAGE_LIST:null
-});
+
+.root {
+  display: block;
+  background-color: #727272;
+  height: 50px;
+  width:100%;
+  bottom: 0;
+  position: fixed;
+  padding: 10px;
+  input{
+    margin-right:10px;
+    width:85%;
+  }
+}

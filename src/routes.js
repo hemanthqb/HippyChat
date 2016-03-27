@@ -11,9 +11,7 @@ import React from 'react';
 import Router from 'react-routing/src/Router';
 import fetch from './core/fetch';
 import App from './components/App';
-import ContentPage from './components/ContentPage';
-import NotFoundPage from './components/NotFoundPage';
-import ErrorPage from './components/ErrorPage';
+
 
 const routes = [
   require('./routes/home'),
@@ -40,8 +38,8 @@ const router = new Router(on => {
   });
 
   on('error', (state, error) => state.statusCode === 404 ?
-    <App context={state.context} error={error}><NotFoundPage /></App> :
-    <App context={state.context} error={error}><ErrorPage /></App>
+    <App context={state.context} error={error}></App> :
+    <App context={state.context} error={error}></App>
   );
 });
 
